@@ -13,14 +13,20 @@ window.addEventListener('load', () => {
             document.querySelector('.song').play();
             animationTimeline();
         } else {
+            document.querySelector('.song').play();
             animationTimeline();
         }
     });
 });
 
 
+
 // animation timeline
 const animationTimeline = () => {
+
+    // Show the balloons immediately after the music starts
+    document.querySelector('.seven').style.visibility = 'visible'; // Ensure visibility
+    
     // split chars that needs to be animated individually
     const textBoxChars = document.getElementsByClassName("hbd-chatbox")[0];
     const hbd = document.getElementsByClassName("wish-hbd")[0];
@@ -49,6 +55,19 @@ const animationTimeline = () => {
 
     // timeline
     const tl = new TimelineMax();
+
+     // Insert the balloon animation here
+     tl.staggerFromTo(
+        ".baloons img",      // Target the balloon images
+        2.5, {                // Duration of animation
+            opacity: 0.9,     // Start with the balloons slightly visible
+            y: 1400,          // Start from a low position below the screen
+        }, {
+            opacity: 1,       // Make them fully visible at the end
+            y: -1000,         // Move them upwards (off-screen)
+        },
+        0.2                   // Stagger delay between each balloon animation
+    );
 
     tl.to(".container", 0.6, {
         visibility: "visible"
